@@ -1,0 +1,16 @@
+{
+  "appointment_id": "DEBUG_APT2476A776",
+  "patient_name": "Unknown Patient",
+  "doctor_name": "Dr. Rajesh Kumar",
+  "doctor_specialty": "Cardiologist",
+  "appointment_date": "2025-07-08T15:05:17.493794",
+  "hospital": "Ruby Hall",
+  "location": "Pune",
+  "cost": 1500,
+  "patient_contact": "Not provided",
+  "notification_sent": false,
+  "reminder_scheduled": true,
+  "reminder_time": "2025-07-08T14:35:17.493794",
+  "reminder_sent": false,
+  "reminder_message": "Hi Akanksha,\n\nThis is a friendly reminder about your upcoming appointment with Dr. Rajesh Kumar, Cardiologist, at Ruby Hall on July 8th at 3:05 PM.  Your appointment ID is DEBUG_APT2476A776.\n\nTo help ensure a smooth visit, please arrive 15 minutes early.  For your cardiology appointment, it's helpful if you can bring a list of your current medications, including dosages.\n\nWe look forward to seeing you!\n\nWarmly,\n\nThe Ruby Hall Team"
+}

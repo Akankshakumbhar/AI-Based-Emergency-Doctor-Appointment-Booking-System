@@ -1,0 +1,9 @@
+{
+  "recommended_specialty": "Unknown",
+  "recommended_doctors": [],
+  "patient_location": "New York, NY",
+  "patient_insurance": "UnitedHealthcare",
+  "insurance_matched": false,
+  "message": "Unfortunately, due to an internal error, I am unable to provide doctor recommendations at this time. Please try again later.",
+  "criteria": {}
+}

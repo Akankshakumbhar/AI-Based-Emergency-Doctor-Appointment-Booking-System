@@ -1,0 +1,11 @@
+{
+  "appointment_id": "APTE7802E06",
+  "doctor_name": "Dr. Sanjay Gupta",
+  "doctor_specialty": "Cardiologist",
+  "appointment_date": "2025-07-14T17:56:15.608892",
+  "hospital": "Apollo",
+  "location": "Pune",
+  "cost": 1500,
+  "notification_sent": true,
+  "notification_message": "Your appointment with Dr. Sanjay Gupta has been confirmed for 2025-07-14T17:56:15.608892 at Apollo. Please arrive 15 minutes early. Appointment ID: APTE7802E06"
+}

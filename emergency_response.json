@@ -1,0 +1,10 @@
+{
+  "emergency_detected": false,
+  "emergency_type": "Unknown",
+  "patient_location": "Unknown",
+  "ambulance_called": false,
+  "ai_doctor_script": "Insufficient information to generate script. Please provide patient information and symptom assessment.",
+  "calming_guidance": "I am unable to determine the severity of the situation. Please provide more information so I can assist you.",
+  "immediate_actions": [],
+  "monitoring_instructions": "Unable to provide monitoring instructions without patient information."
+}

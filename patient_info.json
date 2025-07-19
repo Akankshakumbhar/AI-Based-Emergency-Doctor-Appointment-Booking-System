@@ -1,0 +1,13 @@
+{
+  "patient_id": "YS123",
+  "name": "Yash Sharma",
+  "age": 27,
+  "gender": "Male",
+  "contact": "987-654-3210",
+  "symptoms": "cough, fever",
+  "symptom_duration": "3 days",
+  "medical_history": "None",
+  "current_medications": "None",
+  "location": "Pune",
+  "insurance": "Star Health"
+}

@@ -1,0 +1,15 @@
+{
+  "appointment_id": "APTD4FB0B98",
+  "doctor_name": "Dr. Deepak Sharma",
+  "doctor_specialty": "General Physician",
+  "appointment_date": "2025-07-15T14:30:00",
+  "hospital": "Ruby Hall",
+  "location": "Pune",
+  "cost": 1500,
+  "notification_sent": true,
+  "notification_message": "Your appointment with Dr. Deepak Sharma has been confirmed for 2025-07-15T14:30:00 at Ruby Hall. Please arrive 15 minutes early. Appointment ID: APTD4FB0B98",
+  "reminder_scheduled": true,
+  "reminder_time": "2025-07-15T14:00:00",
+  "reminder_sent": false,
+  "reminder_message": "Subject: Friendly Reminder: Your Appointment with Dr. Sharma is Soon!\n\nHi Priya,\n\nThis is a friendly reminder about your appointment with Dr. Deepak Sharma, our General Physician, today at Ruby Hall at 2:30 PM. We know you've been experiencing a fever, cold, and cough, and Dr. Sharma is looking forward to helping you feel better.\n\nYour appointment ID is APTD4FB0B98. Please arrive 15 minutes early to allow time for check-in.\n\nSince this is a general check-up, please bring a list of any medications you're currently taking.\n\nWe're here to help! If you have any questions or need to reschedule, please call us.\n\nWishing you well,\n\nThe Ruby Hall Team"
+}

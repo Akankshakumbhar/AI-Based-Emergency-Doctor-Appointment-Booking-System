@@ -1,0 +1,15 @@
+{
+  "appointment_id": "APTE7802E06",
+  "doctor_name": "Dr. Sanjay Gupta",
+  "doctor_specialty": "Cardiologist",
+  "appointment_date": "2025-07-14T17:56:15.608892",
+  "hospital": "Apollo",
+  "location": "Pune",
+  "cost": 1500,
+  "notification_sent": true,
+  "notification_message": "Your appointment with Dr. Sanjay Gupta has been confirmed for 2025-07-14T17:56:15.608892 at Apollo. Please arrive 15 minutes early. Appointment ID: APTE7802E06",
+  "reminder_scheduled": true,
+  "reminder_time": "2025-07-14T17:26:15.608892",
+  "reminder_sent": false,
+  "reminder_message": "Subject: Gentle Reminder: Your Appointment with Dr. Gupta at Apollo\n\nDear Aum Prakash,\n\nThis is a friendly reminder about your appointment with Dr. Sanjay Gupta, our Cardiologist, today at Apollo for your checkup regarding the chest pain you've been experiencing.\n\nPlease arrive 15 minutes early, around 5:41 PM, to allow time for check-in.\n\nFor your cardiology appointment, please remember to bring a list of your current medications. It would also be helpful to note down any specific questions you have for Dr. Gupta.\n\nYour Appointment ID is APTE7802E06. Please have this handy if needed.\n\nWe understand that you've been experiencing severe pain on your left side and we want to assure you that Dr. Gupta will provide the best possible care.\n\nWe look forward to seeing you soon and helping you feel better.\n\nWarmly,\n\nThe Apollo Team"
+}

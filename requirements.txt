@@ -1,0 +1,9 @@
+crewai
+python-dotenv
+google-generativeai
+fastapi
+uvicorn[standard]
+faker
+python-decouple
+pandas
+apscheduler 

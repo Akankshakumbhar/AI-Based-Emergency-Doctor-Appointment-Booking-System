@@ -1,0 +1,13 @@
+{
+  "patient_id": "PID-001",
+  "name": "akanksha kumbhar",
+  "age": 89,
+  "gender": "female",
+  "contact": "9987675656",
+  "symptoms": "chest pain",
+  "symptom_duration": "2 hours",
+  "medical_history": "no medical history",
+  "current_medications": "aspirin",
+  "location": "Pune",
+  "insurance": "icic lombard"
+}

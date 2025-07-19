@@ -1,0 +1,16 @@
+{
+  "appointment_id": "APTD49444EA",
+  "patient_name": "Unknown Patient",
+  "doctor_name": "Dr. Sunita Sharma",
+  "doctor_specialty": "Cardiologist",
+  "appointment_date": "2025-07-09T11:21:25.984369",
+  "hospital": "Ruby Hall",
+  "location": "Pune",
+  "cost": 1500,
+  "patient_contact": "Not provided",
+  "notification_sent": true,
+  "notification_message": "Your appointment with Dr. Sunita Sharma has been confirmed for 2025-07-09T11:21:25.984369 at Ruby Hall. Please arrive 15 minutes early. Appointment ID: APTD49444EA",
+  "reminder_message": "Hi mansi patil! \ud83d\udc4b\n            \n            \u23f0 Your appointment with Dr. Sunita Sharma (Cardiologist) is in 30 minutes.\n            \ud83d\udcc5 Date & Time: 2025-07-09T11:21:25.984369\n            \ud83c\udfe5 Hospital: Ruby Hall\n            \n            Please arrive 15 minutes early and bring any relevant medical reports.\n            \n            \ud83d\udccb Appointment ID: APTD49444EA\n            \n            See you soon! \ud83c\udfe5",
+  "reminder_sent": true,
+  "reminder_sent_at": "2025-07-09T10:51:30.689736"
+}
