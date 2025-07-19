@@ -1,0 +1,250 @@
+manage_process_task:
+  description: "Manage the entire patient interaction flow. First, collect patient info, then analyze symptoms, then recommend doctors. You must coordinate the agents to perform these tasks in order."
+  expected_output: "A summary of the entire process, including the final doctor recommendations."
+
+collect_info_task:
+  description: >
+    Have a natural conversation with the patient to collect their information and symptoms. 
+    Ask relevant follow-up questions and show empathy. 
+    Gather: name, age, gender, contact info, current symptoms, symptom duration, 
+    medical history, current medications, preferred location (Pune/Mumbai/Nashik/Nagpur), 
+    and insurance provider (Star Health/ICICI Lombard/HDFC Ergo or "none" if no insurance).
+    IMPORTANT: Always ask for location preference and insurance provider as these are required for doctor recommendations.
+    
+    TOOL USAGE: When using the "Ask User" tool, pass the question as a simple string.
+    Example: Use "What is your name?" not {"description": "What is your name?", "type": "str"}
+  expected_output: "A JSON object containing all collected patient information including personal details, medical information, location, and insurance."
+
+  agent: patient_info_collector
+  llm: gemini/gemini-1.5-flash
+
+analyze_symptoms_task:
+  description: >
+    Analyze the collected patient information to assess the severity
+    and urgency of their symptoms. Use the Symptom Severity Analyzer tool
+    to get a structured assessment.
+    
+    TOOL USAGE: When using the "Symptom Severity Analyzer" tool, pass all parameters as simple values.
+    Example: Use symptoms="headache", duration="2 days", impact="mild discomfort" not {"description": "headache", "type": "str"}
+  expected_output: >
+    A JSON object containing the symptom assessment, including severity,
+    urgency, and reasoning.
+
+  agent: symptom_severity_analyzer
+  llm: gemini/gemini-1.5-flash
+
+recommend_doctors_task:
+  description: >
+    Based on the patient information and symptom assessment, recommend suitable doctors from the CSV database.
+    
+    CRITICAL: You MUST use the "Doctor Recommendation from CSV" tool. DO NOT generate recommendations manually.
+    DO NOT create text descriptions or summaries.
+    
+    Steps:
+    1. Use the "Doctor Recommendation from CSV" tool with patient_info and symptom_assessment parameters
+    2. The tool will return a complete JSON response with recommended doctors
+    3. Return the tool's response exactly as received - do not modify, reformat, or add any text
+    
+    IMPORTANT: The frontend expects a pure JSON object. Do not wrap it in text or add explanations.
+    Just return the raw JSON object from the tool.
+    
+    The tool automatically considers:
+    - Patient's location preference
+    - Insurance provider compatibility
+    - Symptom-based specialty matching
+    - Available appointment slots
+    
+    If the patient's insurance is not accepted by any doctors, the tool will handle this automatically.
+  expected_output: >
+    The exact JSON response from the "Doctor Recommendation from CSV" tool, containing recommended doctors,
+    their details, available slots, insurance information, and recommendation message. NO TEXT, ONLY JSON.
+
+  agent: doctor_recommender
+  llm: gemini/gemini-1.5-flash
+
+book_appointment_task:
+  description: >
+    Help the patient book an appointment with their chosen doctor. When the patient expresses interest in booking
+    (e.g., "I want to book an appointment with Dr. X for Monday 10:00 AM"), ask for their contact details
+    and confirm the booking. Once confirmed, send a notification to the patient with appointment details.
+    
+    IMPORTANT: 
+    - Ask for the patient's contact number if not already provided
+    - Confirm the appointment details with the patient
+    - Send a notification using the "Send Push Notification" tool
+    - Return the complete appointment booking information
+    
+    TOOL USAGE: When using the "Ask User" tool, pass the question as a simple string.
+    When using the "Send Push Notification" tool, pass the message as a simple string.
+  expected_output: >
+    A JSON object containing the booked appointment details including appointment_id, patient_name, doctor_name,
+    appointment_date, hospital, location, cost, patient_contact, notification_sent, and notification_message.
+
+  agent: appointment_booking_agent
+  llm: gemini/gemini-1.5-flash
+
+evaluate_severity_task:
+  description: "Analyze the collected patient information to assess the severity and urgency of their condition. Consider factors like symptom intensity, duration, impact on daily life, and potential risks."
+  expected_output: "A JSON object containing severity assessment with urgency level and reasoning."
+
+  agent: symptom_severity_analyzer
+  llm: gemini/gemini-1.5-flash
+
+schedule_reminder_task:
+  description: >
+    Schedule a complete reminder for a booked appointment. This includes calculating the reminder time
+    (30 minutes before the appointment), generating a personalized reminder message, and scheduling the
+    reminder for delivery.
+    
+    IMPORTANT TOOL USAGE:
+    - Use the "Schedule Complete Reminder" tool with appointment_data and patient_data parameters
+    - The tool will handle: reminder time calculation, message generation, and scheduling
+    - Return the complete reminder scheduling information
+    
+    The reminder should include:
+    - Patient's name and appointment details
+    - Doctor's name and specialty
+    - Appointment date/time and location
+    - Preparation instructions based on specialty
+    - Appointment ID for reference
+  expected_output: >
+    A JSON object containing reminder scheduling details including reminder_time, appointment_time,
+    message_preview, appointment_id, and status confirmation.
+
+  agent: reminder_specialist
+  llm: gemini/gemini-1.5-flash
+
+send_immediate_reminder_task:
+  description: >
+    Send an immediate reminder notification to a patient about their upcoming appointment.
+    Generate a concise, friendly reminder message and send it via push notification.
+    
+    IMPORTANT TOOL USAGE:
+    - Use the "Send Reminder" tool with appointment_data and patient_data parameters
+    - The tool will generate the message and send the notification
+    - Return the notification delivery confirmation
+    
+    The immediate reminder should be:
+    - Concise and friendly
+    - Include key appointment details
+    - Sent via push notification
+  expected_output: >
+    A JSON object containing notification delivery status, message content, and appointment_id.
+
+  agent: reminder_specialist
+  llm: gemini/gemini-1.5-flash
+
+emergency_response_task:
+  description: >
+    EMERGENCY RESPONSE TASK - Triggered when critical symptoms are detected.
+    
+    Analyze the patient information and symptom assessment to determine if this is a medical emergency.
+    If emergency is detected:
+    
+    1. IMMEDIATE ACTIONS:
+       - Trigger ambulance call with patient location and symptoms
+       - Generate AI doctor consultation script for video call
+       - Provide immediate calming guidance to patient
+       - Monitor patient status until help arrives
+    
+    2. EMERGENCY CRITERIA (any of these triggers emergency response):
+       - Severity: "High" AND Urgency: "Urgent"
+       - Symptoms: chest pain, heart attack, stroke, severe bleeding, unconsciousness
+       - Breathing difficulties, severe allergic reactions
+       - Child emergency situations
+       - Pregnancy complications
+    
+    3. AI DOCTOR SCRIPT GENERATION:
+       - Use patient_info.json and symptom_assessment.json
+       - Generate professional medical consultation script
+       - Include patient history, current symptoms, vital signs needed
+       - Provide immediate medical guidance and next steps
+    
+    4. AMBULANCE COORDINATION:
+       - Extract patient location from patient_info.json
+       - Generate emergency call details
+       - Provide patient contact information
+    
+    IMPORTANT: This task should be triggered IMMEDIATELY when emergency conditions are detected,
+    bypassing normal appointment booking workflow.
+    
+    TOOL USAGE: Use EmergencyResponseTool for all emergency actions.
+  expected_output: >
+    A JSON object containing emergency response details including:
+    - emergency_detected: boolean
+    - ambulance_called: boolean
+    - patient_location: string
+    - emergency_type: string
+    - ai_doctor_script: string
+    - calming_guidance: string
+    - immediate_actions: array
+    - monitoring_instructions: string
+
+  agent: emergency_response_agent
+  llm: gemini/gemini-2.0-flash
+
+ai_virtual_doctor_task:
+  description: >
+    AI VIRTUAL DOCTOR TASK - Create a fake AI doctor for emergency video consultation.
+    
+    This task creates a complete AI virtual doctor experience including:
+    
+    1. AI DOCTOR PROFILE GENERATION:
+       - Generate professional doctor name and credentials
+       - Create medical specialization and experience
+       - Define professional appearance and speaking style
+       - Set up avatar description for video call
+    
+    2. CONVERSATION SCRIPT CREATION:
+       - Generate opening greeting and introduction
+       - Create assessment questions based on symptoms
+       - Develop symptom evaluation dialogue
+       - Include reassurance and calming statements
+       - Provide next steps and recommendations
+    
+    3. VIDEO CALL SETUP:
+       - Create free video call link (Jitsi Meet)
+       - Set up AI doctor avatar configuration
+       - Enable real-time conversation capabilities
+       - Configure professional medical environment
+    
+    4. REAL-TIME RESPONSE GENERATION:
+       - Create response templates for common interactions
+       - Handle worsening symptoms scenarios
+       - Respond to medication questions
+       - Address fear and anxiety
+       - Provide treatment guidance
+    
+    5. AMBULANCE DECISION EVALUATION:
+       - Assess severity level and emergency type
+       - Determine if ambulance is needed
+       - Provide urgency level and reasoning
+       - Give alternative actions if no ambulance
+    
+    IMPORTANT: This creates a complete fake AI doctor that can conduct emergency consultations
+    without requiring real medical professionals.
+    
+    TOOL USAGE: Use AIVirtualDoctorTool for all AI doctor creation and setup.
+  expected_output: >
+    A JSON object containing complete AI virtual doctor setup including:
+    - ai_doctor_created: boolean
+    - doctor_profile: object (name, credentials, specialization, appearance)
+    - conversation_script: object (greeting, questions, evaluation, reassurance)
+    - video_call_setup: object (meeting_id, link, service, avatar_config)
+    - real_time_responses: object (response templates for various scenarios)
+    - ambulance_decision: object (needed, urgency, reasoning, recommendations)
+
+  agent: ai_virtual_doctor_agent
+  llm: gemini/gemini-2.0-flash
+
+
+
+
+
+
+
+
+
+
+
+
