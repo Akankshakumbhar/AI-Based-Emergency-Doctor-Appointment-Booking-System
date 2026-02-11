@@ -50,3 +50,22 @@ notification  purpose pushoverapi
 phonecall twiio api
 
 
+ haversine formula fir suggested doctor nearby location 
+ waht is haversine formula to calculate  the great cricke distance between  two points on the sphere ( earth) using their latitude and longitude ,like gps calculation 
+
+ we use the haversine  formula to computer distance between the patients location and healthcare  facilities . it accounts for earth curvature , converting lat lon to radiant, applying  the formula and returning kilometers  , we then sort families by distance and recommend the nearest  ones 
+  patient shares locations  then distance to each facility  is calculated and return 5 top nearest  
+  separate csv file is there which have all this information of country, lat , log and all details required 
+
+  insurance  matching.....
+  we match insurance  by splitting each doctor insurance  list normalizing to lowercase , and checking if the patient  insurance  is in list we sort result to protize matching  insurance  ,then by cost so patients see covered options first 
+
+
+  .............
+  emergency  consultations 
+  for emergency  consultations  we use gemini to generate a structure  medical guidance  script  then script is converted into to speech with gets save mp3 and encore to base64foe web delivery. this provide immediate audio guidance while emergency  services are contacted 
+
+  Twirl twilio markup language for controlling phone calls and sms 
+  convert text to speech during phone call automatically
+  we create voice response add say instruction with voice and language ,include pause ,and pass the twirl string when creating the call twilio convert text tospeech and plays it during calls
+  
