@@ -79,5 +79,13 @@ over single connection  connection always onn never close
  
 why websocket because we have hhtp normal client send request server response  connection close  
 you refresh page browser ask server server respond done
+............
 
 
+gtts  used when the user click on call button and the virtual  doctor speak for that gtts is used its is google text to speech 
+ python library tahts uses google text to speech api to convert textinto spoken audio
+ hiw? it send text to google server, receives audio saves as mp3
+
+
+
+ 
