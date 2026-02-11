@@ -69,3 +69,15 @@ phonecall twiio api
   convert text to speech during phone call automatically
   we create voice response add say instruction with voice and language ,include pause ,and pass the twirl string when creating the call twilio convert text tospeech and plays it during calls
   
+
+WebSocket::
+a communication  protocol that allows a client like browser and server to talk to each other continuously in both direction 
+over single connection  connection always onn never close
+
+ th3 client connects to  server accepts and maintain  the connection 
+ when ai need input it send a json message  with type  question the cluen5 dispalys set of questions user responds and the  response is ent back vioa a post endpoint . the setver stires it in memmory and the tool 4etrievers it to cont8ve the conversation  . this enables instant bidirectionap communication  
+ 
+why websocket because we have hhtp normal client send request server response  connection close  
+you refresh page browser ask server server respond done
+
+
